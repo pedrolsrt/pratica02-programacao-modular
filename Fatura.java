@@ -14,6 +14,20 @@ public class Fatura {
         calcularValorTotal();
     }
 
+    public void removerItem(int indice) {
+        if (indice >= 0 && indice < itens.size()) {
+            itens.remove(indice);
+            calcularValorTotal();
+        }
+    }
+
+    public void alterarQuantidade(int indice, int novaQuantidade) {
+        if (indice >= 0 && indice < itens.size() && novaQuantidade > 0) {
+            itens.get(indice).setQuantidade(novaQuantidade);
+            calcularValorTotal();
+        }
+    }
+
     public void calcularValorTotal() {
         valorTotal = 0;
 

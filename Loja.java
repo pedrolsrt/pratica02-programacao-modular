@@ -60,23 +60,22 @@ public class Loja {
                         break;
                     }
 
-                    System.out.print("Digite a quantidade: ");
+                    System.out.print("Digite a quantidade (0 para voltar): ");
                     int quantidade = teclado.nextInt();
 
-                    if (quantidade <= 0) {
+                    if (quantidade == 0) {
+                        break;
+                    }
+
+                    if (quantidade < 0) {
                         System.out.println("Quantidade invalida.");
                         break;
                     }
 
-                    Item item = new Item(
-                            produtoEscolhido,
-                            quantidade
-                    );
-
+                    Item item = new Item(produtoEscolhido, quantidade);
                     fatura.adicionarItem(item);
 
                     System.out.println("Compra adicionada com sucesso.");
-
                     break;
 
                 case 2:
@@ -84,25 +83,77 @@ public class Loja {
 
                     System.out.println("\n0 - Voltar");
                     System.out.print("Digite 0 para voltar: ");
-
-                    int voltar = teclado.nextInt();
-
-                    if (voltar == 0) {
-                        break;
-                    }
+                    teclado.nextInt();
 
                     break;
 
                 case 3:
-                    System.out.println(
-                            "\nOpcao sera implementada no Dia 3."
-                    );
+                    if (fatura.getItens().size() == 0) {
+                        System.out.println("\nNenhum item para excluir.");
+                        break;
+                    }
+
+                    fatura.exibirFatura();
+
+                    System.out.println("\n0 - Voltar");
+                    System.out.print("Digite o numero do item que deseja excluir: ");
+                    int itemExcluir = teclado.nextInt();
+
+                    if (itemExcluir == 0) {
+                        break;
+                    }
+
+                    if (itemExcluir < 1
+                            || itemExcluir > fatura.getItens().size()) {
+                        System.out.println("Item invalido.");
+                        break;
+                    }
+
+                    fatura.removerItem(itemExcluir - 1);
+
+                    System.out.println("Item excluido com sucesso.");
                     break;
 
                 case 4:
-                    System.out.println(
-                            "\nOpcao sera implementada no Dia 3."
+                    if (fatura.getItens().size() == 0) {
+                        System.out.println("\nNenhum item para alterar.");
+                        break;
+                    }
+
+                    fatura.exibirFatura();
+
+                    System.out.println("\n0 - Voltar");
+                    System.out.print("Digite o numero do item que deseja alterar: ");
+                    int itemAlterar = teclado.nextInt();
+
+                    if (itemAlterar == 0) {
+                        break;
+                    }
+
+                    if (itemAlterar < 1
+                            || itemAlterar > fatura.getItens().size()) {
+                        System.out.println("Item invalido.");
+                        break;
+                    }
+
+                    System.out.print("Digite a nova quantidade (0 para voltar): ");
+                    int novaQuantidade = teclado.nextInt();
+
+                    if (novaQuantidade == 0) {
+                        break;
+                    }
+
+                    if (novaQuantidade < 0) {
+                        System.out.println("Quantidade invalida.");
+                        break;
+                    }
+
+                    fatura.alterarQuantidade(
+                            itemAlterar - 1,
+                            novaQuantidade
                     );
+
+                    System.out.println("Quantidade alterada com sucesso.");
                     break;
 
                 case 5:
